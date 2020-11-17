@@ -44,9 +44,9 @@ public class Json2DatabaseService {
             System.out.println("data:::::");
             System.out.println(watchDataHex.getData());
             watchDataHexMapper.insert(watchDataHex);
-            // TODO 存正常数据
-            WatchData watchData = WatchDataUtil.HexDataToData(data);
-            watchDataMapper.insert(watchData);
+            // TODO 存正常数据 影响效率
+            // WatchData watchData = WatchDataUtil.HexDataToData(data);
+            // watchDataMapper.insert(watchData);
         }
         System.out.println("insert complete");
     }

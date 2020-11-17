@@ -33,4 +33,12 @@ public class WatchDataController {
         List<WatchData> watchDataList = watchDataService.queryDataPeriod(startTime, endTime);
         return R.ok().data(watchDataList);
     }
+
+    @GetMapping("transferHex2Data")
+    public R transferHex2Data(@RequestParam(value = "startTime") String startTime,
+                             @RequestParam(value = "endTime") String endTime){
+        System.out.println("controller");
+        return R.ok();
+    }
+
 }
