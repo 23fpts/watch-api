@@ -3,6 +3,7 @@ package com.thc.watchapi.model;
 import com.baomidou.mybatisplus.annotation.*;
 import com.thc.watchapi.model.base.BaseModel;
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,6 +17,7 @@ import java.util.Date;
  */
 @Data
 @TableName("watch_data_hex")
+@ToString
 public class WatchDataHex extends BaseModel {
 
     private static final long serialVersionUID=1L;

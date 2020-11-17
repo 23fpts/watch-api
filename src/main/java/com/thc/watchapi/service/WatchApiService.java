@@ -85,6 +85,29 @@ public class WatchApiService {
         }
     }
 
+    // 关闭接口
+    public void close() throws Exception {
+        // TODO 查询条件
+        List<Student> studentList = studentMapper.selectList(null);
+        try{
+            // 循环处理所有student
+            for (Student student : studentList) {
+                // 手表mac
+                String mac = student.getWatchMac();
+                // 连接的url
+                String url = getCloseUrl(mac);
+                String result = HttpUtil.get(url);
+                // 不需要处理返回结果
+//                JSONObject json = JSON.parseObject(result);
+//                Map<String, Object> res = new HashMap<>();
+//                res.put("data", json);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new Exception("第三方接口异常");
+        }
+    }
+
     // 根据connect的url的处理
     private String getConnectUrl(String mac) {
         String content = mac+watchApiUrl.getUUID();
@@ -99,11 +122,25 @@ public class WatchApiService {
         return url;
     }
 
+    // 读数据
     private String getReadUrl(String mac) {
         String url = UriComponentsBuilder.fromUriString(watchApiUrl.getPort())
                 .queryParam("cmd", watchApiUrl.getCmd())
                 .queryParam("target", watchApiUrl.getTarget())
                 .queryParam("command", watchApiUrl.getReadCommand())
+                .queryParam("gatewayId", watchApiUrl.getGatewayId())
+                .queryParam("contentType", watchApiUrl.getContentType())
+                .queryParam("content", mac)
+                .build().toString();
+        return url;
+    }
+
+    // 断开连接
+    private String getCloseUrl(String mac) {
+        String url = UriComponentsBuilder.fromHttpUrl(watchApiUrl.getPort())
+                .queryParam("cmd", watchApiUrl.getCmd())
+                .queryParam("target", watchApiUrl.getTarget())
+                .queryParam("command", watchApiUrl.getCloseCommand())
                 .queryParam("gatewayId", watchApiUrl.getGatewayId())
                 .queryParam("contentType", watchApiUrl.getContentType())
                 .queryParam("content", mac)

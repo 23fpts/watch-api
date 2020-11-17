@@ -32,4 +32,10 @@ public class WatchApiController {
         watchApiService.read();
         return R.ok();
     }
+
+    @GetMapping("close")
+    public R close() throws Exception {
+        watchApiService.close();
+        return R.ok();
+    }
 }

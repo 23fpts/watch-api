@@ -25,13 +25,29 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
-        // create_user 处理
-        Object object = request.getAttribute("currentUser");
-        Admin admin = (Admin) object;
-        this.setFieldValByName("createUser", admin.getUsername(), metaObject);
-        this.setFieldValByName("gmtCreate", new Date(), metaObject);
-        this.setFieldValByName("gmtModified", new Date(), metaObject);
-        this.setFieldValByName("deleted", false, metaObject);
+        try {
+            // create_user 处理
+            System.out.println("insert");
+            System.out.println("request:");
+            System.out.println(request);
+            System.out.println(request.toString());
+            Object object = request.getAttribute("currentUser");
+            System.out.println("object");
+            System.out.println(object);
+//        Admin admin = (Admin) object;
+            if(object!=null) {
+                Admin admin = (Admin) object;
+                this.setFieldValByName("createUser", admin.getUsername(), metaObject);
+            }
+//        this.setFieldValByName("createUser", admin.getUsername(), metaObject);
+            this.setFieldValByName("gmtCreate", new Date(), metaObject);
+            this.setFieldValByName("gmtModified", new Date(), metaObject);
+            this.setFieldValByName("deleted", false, metaObject);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

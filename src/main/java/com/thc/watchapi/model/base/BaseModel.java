@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -18,6 +19,7 @@ import java.util.Date;
  * @date 2020/11/12 4:23 下午
  */
 @Data
+@ToString
 public class BaseModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -25,7 +27,7 @@ public class BaseModel implements Serializable {
      * 自增主键
      */
     @ApiModelProperty(value = "ID")
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @TableId(value = "id", type = IdType.AUTO)
     private String id;
 
     /**
