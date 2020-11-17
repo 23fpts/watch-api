@@ -38,6 +38,13 @@ public class WatchDataController {
     public R transferHex2Data(@RequestParam(value = "startTime") String startTime,
                              @RequestParam(value = "endTime") String endTime){
         System.out.println("controller");
+        watchDataService.transferHex2Data(startTime, endTime);
+        return R.ok();
+    }
+
+    @GetMapping("test")
+    public R testTrans(){
+        watchDataService.testTrans();
         return R.ok();
     }
 

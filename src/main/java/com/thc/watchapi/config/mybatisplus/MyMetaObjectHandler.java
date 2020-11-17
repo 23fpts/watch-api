@@ -33,10 +33,11 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 //                Admin admin = (Admin) object;
 //                this.setFieldValByName("createUser", admin.getUsername(), metaObject);
 //            }
-            this.setFieldValByName("createUser", "bluetooth", metaObject);
-            this.setFieldValByName("gmtCreate", new Date(), metaObject);
-            this.setFieldValByName("gmtModified", new Date(), metaObject);
-            this.setFieldValByName("deleted", false, metaObject);
+        System.out.println("insertFill...");
+        this.setFieldValByName("createUser", "bluetooth", metaObject);
+        this.setFieldValByName("gmtCreate", new Date(), metaObject);
+        this.setFieldValByName("gmtModified", new Date(), metaObject);
+        this.setFieldValByName("deleted", false, metaObject);
 
     }
 

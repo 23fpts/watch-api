@@ -3,9 +3,11 @@ package com.thc.watchapi.model;
 import com.baomidou.mybatisplus.annotation.*;
 import com.thc.watchapi.model.base.BaseModel;
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 
 /**
@@ -17,6 +19,7 @@ import java.util.Date;
  */
 @Data
 @TableName("watch_data")
+@ToString
 public class WatchData extends BaseModel {
 
 
@@ -26,21 +29,21 @@ public class WatchData extends BaseModel {
 
     private String mac;
 
-    private Integer sportsTime;
+    private BigInteger sportsTime;
 
-    private Integer realTimeHeartRate;
+    private BigInteger realTimeHeartRate;
 
-    private Integer averageHeartRate;
+    private BigInteger averageHeartRate;
 
-    private Integer distance;
+    private BigInteger distance;
 
-    private Integer calorie;
+    private BigInteger calorie;
 
-    private Integer totalStepCount;
+    private BigInteger totalStepCount;
 
-    private Integer realTimeCadence;
+    private BigInteger realTimeCadence;
 
-    private Integer averageCadence;
+    private BigInteger averageCadence;
 
     private Integer sportsType;
 
@@ -53,5 +56,7 @@ public class WatchData extends BaseModel {
     private BigDecimal longitude;
 
     private BigDecimal latitude;
+
+    private Date hexCreateTime;
 
 }

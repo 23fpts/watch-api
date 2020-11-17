@@ -41,7 +41,15 @@ public class WatchDataService {
         List<WatchDataHex> watchDataHexList = watchDataHexMapper.selectList(wrapper);
         for (WatchDataHex watchDataHex: watchDataHexList) {
             WatchData watchData = WatchDataUtil.HexDataToData(watchDataHex.getData());
+            watchData.setHexCreateTime(watchDataHex.getGmtCreate());
             watchDataMapper.insert(watchData);
         }
+    }
+
+    public void testTrans() {
+        WatchDataHex watchDataHex = watchDataHexMapper.selectById(1292);
+        WatchData watchData = WatchDataUtil.HexDataToData(watchDataHex.getData());
+        watchData.setHexCreateTime(watchDataHex.getGmtCreate());
+        watchDataMapper.insert(watchData);
     }
 }
