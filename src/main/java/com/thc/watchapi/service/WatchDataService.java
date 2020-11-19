@@ -30,7 +30,7 @@ public class WatchDataService {
 
     public List<WatchData> queryDataPeriod(String startTime, String endTime) {
         QueryWrapper<WatchData> wrapper = new QueryWrapper<>();
-        wrapper.between("gmt_create", startTime, endTime).orderByAsc("gmt_create");
+        wrapper.between("hex_create_time", startTime, endTime).orderByAsc("hex_create_time");
         List<WatchData> watchDataList = watchDataMapper.selectList(wrapper);
         return watchDataList;
     }
