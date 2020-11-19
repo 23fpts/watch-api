@@ -34,81 +34,95 @@ public class WatchDataUtil {
         hex = hex.replaceAll(",", "");
         WatchData watchData = new WatchData();
         // mac 6-17
-        String mac = hex.substring(6, 18);
+//        String mac = hex.substring(6, 18);
+        String mac = reverse(hex.substring(6, 18));
+
         watchData.setMac(mac);
         System.out.println("mac: "+mac);
         // 运动时长 18-25
         System.out.println(hex.substring(18, 26));
+        System.out.println(reverse(hex.substring(18, 26)));
 //        System.out.println(Integer.parseInt(hex.substring(18, 26), 16));
 //        Integer sportsTime = Integer.parseInt(hex.substring(18, 26), 16);
-        BigInteger sportsTime = new BigInteger(hex.substring(18, 26), 16);
+        BigInteger sportsTime = new BigInteger(reverse(hex.substring(18, 26)), 16);
         watchData.setSportsTime(sportsTime);
         System.out.println("运动时长: "+sportsTime);
         System.out.println(hex.substring(18, 26));
+        System.out.println(reverse(hex.substring(18, 26)));
         // 实时心率 26-27
 //        Integer realTimeHeartRate = Integer.parseInt(hex.substring(26, 28), 16);
-        BigInteger realTimeHeartRate = new BigInteger(hex.substring(26, 28), 16);
+        BigInteger realTimeHeartRate = new BigInteger(reverse(hex.substring(26, 28)), 16);
         watchData.setRealTimeHeartRate(realTimeHeartRate);
         System.out.println("实时心率: "+realTimeHeartRate);
         System.out.println(hex.substring(26, 28));
+        System.out.println(reverse(hex.substring(26, 28)));
         // 平均心率 28-29
 //        Integer averageHeartRate = Integer.parseInt(hex.substring(28, 30), 16);
-        BigInteger averageHeartRate = new BigInteger(hex.substring(28, 30), 16);
+        BigInteger averageHeartRate = new BigInteger(reverse(hex.substring(28, 30)), 16);
         watchData.setAverageHeartRate(averageHeartRate);
         System.out.println("平均心率: "+averageHeartRate);
         System.out.println(hex.substring(28, 30));
+        System.out.println(reverse(hex.substring(28, 30)));
         // 距离 30-37
 //        Integer distance = Integer.parseInt(hex.substring(30, 38), 16);
-        BigInteger distance = new BigInteger(hex.substring(30, 38), 16);
+        BigInteger distance = new BigInteger(reverse(hex.substring(30, 38)), 16);
         watchData.setDistance(distance);
         System.out.println("距离: "+distance);
         System.out.println(hex.substring(30, 38));
+        System.out.println(reverse(hex.substring(30, 38)));
         // 卡路里 38-45
 //        Integer calorie = Integer.parseInt(hex.substring(38, 46), 16);
-        BigInteger calorie = new BigInteger(hex.substring(38, 46), 16);
+        BigInteger calorie = new BigInteger(reverse(hex.substring(38, 46)), 16);
         watchData.setCalorie(calorie);
         System.out.println("卡路里: "+calorie);
         System.out.println(hex.substring(38, 46));
+        System.out.println(reverse(hex.substring(38, 46)));
         // 总步数 46-53
 //        Integer totalStepCount = Integer.parseInt(hex.substring(46, 54), 16);
-        BigInteger totalStepCount = new BigInteger(hex.substring(46, 54), 16);
+        BigInteger totalStepCount = new BigInteger(reverse(hex.substring(46, 54)), 16);
         watchData.setTotalStepCount(totalStepCount);
         System.out.println("总步数: "+totalStepCount);
         System.out.println(hex.substring(46, 54));
+        System.out.println(reverse(hex.substring(46, 54)));
         // 实时步频 54-57
 //        Integer realTimeCadence = Integer.parseInt(hex.substring(54, 58), 16);
-        BigInteger realTimeCadence = new BigInteger(hex.substring(54, 58), 16);
+        BigInteger realTimeCadence = new BigInteger(reverse(hex.substring(54, 58)), 16);
         watchData.setRealTimeCadence(realTimeCadence);
         System.out.println("实时步频: "+realTimeCadence);
         System.out.println(hex.substring(54, 58));
+        System.out.println(reverse(hex.substring(54, 58)));
         // 平均步频 58-61
 //        Integer averageCadence = Integer.parseInt(hex.substring(58, 62), 16);
-        BigInteger averageCadence = new BigInteger(hex.substring(58, 62), 16);
+        BigInteger averageCadence = new BigInteger(reverse(hex.substring(58, 62)), 16);
         watchData.setAverageCadence(averageCadence);
         System.out.println("平均步频: "+averageCadence);
         System.out.println(hex.substring(58, 62));
+        System.out.println(reverse(hex.substring(58, 62)));
         // 运动类型 62-63
-        Integer sportsType = Integer.parseInt(hex.substring(60, 62), 16);
+        Integer sportsType = Integer.parseInt(reverse(hex.substring(60, 62)), 16);
         watchData.setSportsType(sportsType);
         System.out.println("运动类型: "+sportsType);
         System.out.println(hex.substring(60, 62));
+        System.out.println(reverse(hex.substring(60, 62)));
         // 实时速度 64-67
-        Integer realTimeSpeed = Integer.parseInt(hex.substring(64, 68), 16);
+        Integer realTimeSpeed = Integer.parseInt(reverse(hex.substring(64, 68)), 16);
         watchData.setRealTimeSpeed(new BigDecimal(realTimeSpeed));
         System.out.println("实时速度: "+watchData.getRealTimeSpeed());
         System.out.println(hex.substring(64, 68));
+        System.out.println(reverse(hex.substring(64, 68)));
         // 平均速度 averageSpeed 68-71
-        Integer averageSpeed = Integer.parseInt(hex.substring(68, 72), 16);
+        Integer averageSpeed = Integer.parseInt(reverse(hex.substring(68, 72)), 16);
         watchData.setAverageSpeed(new BigDecimal(averageSpeed));
         System.out.println("平均速度: "+watchData.getAverageSpeed());
         System.out.println(hex.substring(68, 72));
+        System.out.println(reverse(hex.substring(68, 72)));
         // 运动状态 sportsStatus 72-73
-        Integer sportsStatus = Integer.parseInt(hex.substring(72, 74), 16);
+        Integer sportsStatus = Integer.parseInt(reverse(hex.substring(72, 74)), 16);
         watchData.setSportsStatus(sportsStatus);
         System.out.println("运动状态: "+watchData.getSportsStatus());
         System.out.println(hex.substring(72, 74));
         // 经度 longitude 74-81  TODO
-        BigInteger longitude = new BigInteger(hex.substring(74, 82), 16);
+        BigInteger longitude = new BigInteger(reverse(hex.substring(74, 82)), 16);
         // 再除以1000000
         BigDecimal longitudeDeal = new BigDecimal(longitude);
         longitudeDeal = longitudeDeal.divide(new BigDecimal(1000000));
@@ -116,7 +130,7 @@ public class WatchDataUtil {
         System.out.println("经度: "+watchData.getLongitude() );
         System.out.println(hex.substring(74, 82));
         // 纬度 latitude 82-89 TODO
-        BigInteger latitude = new BigInteger(hex.substring(82, 90), 16);
+        BigInteger latitude = new BigInteger(reverse(hex.substring(82, 90)), 16);
         // 再除以1000000
         BigDecimal latitudeDeal = new BigDecimal(latitude);
         latitudeDeal = latitudeDeal.divide(new BigDecimal(1000000));
@@ -127,10 +141,21 @@ public class WatchDataUtil {
         return watchData;
     }
 
+    public static String reverse(String str) {
+        // TODO 把诸如 580C0000 转为 00000C58
+        String result = "";
+        int length = str.length()/2;
+        for (int i=0; i<length; i++){
+            result = str.substring(2*i, 2*i+2) + result ;
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
-        test1();
+//        test1();
 //        test2();
 //        test3();
+        System.out.println(reverse("580C0000"));
 
     }
 
