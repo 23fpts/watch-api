@@ -33,8 +33,8 @@ public class WatchDataController {
     private WatchDataService watchDataService;
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name="startTime",value="查询的起始时间",required=true,paramType="form", defaultValue = "2020-11-17 16:11:28"),
-            @ApiImplicitParam(name="endTime",value="查询的结束时间",required=true,paramType="form", defaultValue = "2020-11-17 16:11:37"),
+            @ApiImplicitParam(name="startTime",value="查询的起始时间",required=true,paramType="query", defaultValue = "2020-11-17 16:11:28"),
+            @ApiImplicitParam(name="endTime",value="查询的结束时间",required=true,paramType="query", defaultValue = "2020-11-17 16:11:37"),
     })
     @ApiOperation("查询一段时间的手表数据")
     @GetMapping("queryDataPeriod")

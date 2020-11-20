@@ -8,6 +8,7 @@ import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -27,14 +28,32 @@ public class TestController {
     private StudentMapper studentMapper;
 
     @GetMapping("test")
-    public R test(){
-        Student student = new Student();
-        student.setName("thc");
-        student.setPassword("testpass");
-        student.setWatchId(1);
-        student.setWatchMac("mactest");
-        studentMapper.insert(student);
-        return R.ok();
+    public R test(@RequestParam("test")String test){
+        System.out.println(test);
+//        Student student = new Student();
+//        student.setName("thc");
+//        student.setPassword("testpass");
+//        student.setWatchId(1);
+//        student.setWatchMac("mactest");
+//        studentMapper.insert(student);
+        return R.ok().data(test);
+    }
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="test",value="test", dataType = "String", required=true, paramType="query", defaultValue = "test1")
+    })
+    @ApiOperation("test1")
+    @GetMapping("test1")
+    public BaseResult<String> test1(@RequestParam("test")String test){
+        System.out.println(test);
+//        Student student = new Student();
+//        student.setName("thc");
+//        student.setPassword("testpass");
+//        student.setWatchId(1);
+//        student.setWatchMac("mactest");
+//        studentMapper.insert(student);
+//        return R.ok();
+        return BaseResult.success(test);
     }
 
     @ApiOperation("测试")
