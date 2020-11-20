@@ -2,6 +2,7 @@ package com.thc.watchapi.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.thc.watchapi.config.redis.RedisConstants;
+import com.thc.watchapi.dto.LoginDto;
 import com.thc.watchapi.exception.MyException;
 import com.thc.watchapi.mapper.AdminMapper;
 import com.thc.watchapi.model.Admin;
@@ -42,7 +43,7 @@ public class LoginService {
 
     private static String msg = "用户名或密码错误";
 
-    public Object login(String username, String password) {
+    public LoginDto login(String username, String password) {
         System.out.println("service start");
         QueryWrapper<Admin> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", username);
@@ -52,11 +53,10 @@ public class LoginService {
         }
         String token = UUID.randomUUID().toString().replace("-", "");
         redisUtil.set(token, admin, RedisConstants.datebase2, expire);
-        Map<Object, Object> map = new HashMap<>();
-        map.put("token", token);
-        map.put("user", admin);
-        System.out.println("service end");
-        return map;
+        LoginDto loginDto = new LoginDto();
+        loginDto.setToken(token);
+        loginDto.setUser(admin);
+        return loginDto;
     }
 
 

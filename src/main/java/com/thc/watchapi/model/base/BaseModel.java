@@ -40,7 +40,7 @@ public class BaseModel implements Serializable {
     /**
      * 删除标志
      */
-    @ApiModelProperty(value = "删除时间", example = "2019-12-01 10:10:10")
+    @ApiModelProperty(value = "删除标志(true表示删除)", example = "false")
     @TableField(value = "is_deleted", fill = FieldFill.INSERT)
     private Boolean deleted;
 
@@ -54,6 +54,7 @@ public class BaseModel implements Serializable {
     /**
      * 创建人
      */
+    @ApiModelProperty(value = "创建者", example = "bluetooth")
     @TableField(value = "create_user", fill = FieldFill.INSERT)
     private String createUser;
 }
