@@ -28,7 +28,7 @@ public class BaseModel implements Serializable {
      */
     @ApiModelProperty(value = "ID")
     @TableId(value = "id", type = IdType.AUTO)
-    private String id;
+    private Integer id;
 
     /**
      * 创建时间
