@@ -8,6 +8,7 @@ import com.thc.watchapi.model.WatchDataHex;
 import com.thc.watchapi.utils.WatchDataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,9 @@ public class WatchDataService {
 
     public List<WatchData> queryDataPeriod(String startTime, String endTime, String mac) {
         QueryWrapper<WatchData> wrapper = new QueryWrapper<>();
-        wrapper.eq("mac", mac);
+        if (!StringUtils.isEmpty(mac)){
+            wrapper.eq("mac", mac);
+        }
         wrapper.between("hex_create_time", startTime, endTime).orderByAsc("hex_create_time");
         List<WatchData> watchDataList = watchDataMapper.selectList(wrapper);
         return watchDataList;
