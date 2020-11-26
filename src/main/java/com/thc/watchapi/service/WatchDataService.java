@@ -34,7 +34,9 @@ public class WatchDataService {
         if (!StringUtils.isEmpty(mac)){
             wrapper.eq("mac", mac);
         }
-        wrapper.between("hex_create_time", startTime, endTime).orderByAsc("hex_create_time");
+        if (!StringUtils.isEmpty(startTime)&&!StringUtils.isEmpty(endTime)){
+            wrapper.between("hex_create_time", startTime, endTime).orderByAsc("hex_create_time");
+        }
         List<WatchData> watchDataList = watchDataMapper.selectList(wrapper);
         return watchDataList;
     }
