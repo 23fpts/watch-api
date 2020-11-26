@@ -35,13 +35,15 @@ public class WatchDataController {
     @ApiImplicitParams({
             @ApiImplicitParam(name="startTime",value="查询的起始时间",required=true,paramType="query", defaultValue = "2020-11-17 16:11:28"),
             @ApiImplicitParam(name="endTime",value="查询的结束时间",required=true,paramType="query", defaultValue = "2020-11-17 16:11:37"),
+            @ApiImplicitParam(name="mac",value="查询的mac",required=true,paramType="query", defaultValue = "75282AB1D3FD"),
     })
     @ApiOperation(value = "查询一段时间的手表数据", notes = "查询xxxx-xxxx时间段内所有的手表数据")
     @GetMapping("queryDataPeriod")
     public BaseResult<List<WatchData>> queryDataPeriod(@RequestParam(value = "startTime") String startTime,
-                                      @RequestParam(value = "endTime") String endTime){
+                                                       @RequestParam(value = "endTime") String endTime,
+                                                       @RequestParam(value = "mac") String mac){
         System.out.println("controller");
-        List<WatchData> watchDataList = watchDataService.queryDataPeriod(startTime, endTime);
+        List<WatchData> watchDataList = watchDataService.queryDataPeriod(startTime, endTime, mac);
         // return R.ok().data(watchDataList);
         return BaseResult.success(watchDataList);
     }
