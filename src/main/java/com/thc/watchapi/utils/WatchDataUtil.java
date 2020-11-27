@@ -32,6 +32,9 @@ public class WatchDataUtil {
         // TODO 经纬度的正负
         // 先去掉逗号
         hex = hex.replaceAll(",", "");
+        for (int i=0; i<hex.length(); i++){
+            System.out.println(i+ ": "+hex.charAt(i));
+        }
         WatchData watchData = new WatchData();
         // mac 6-17
 //        String mac = hex.substring(6, 18);
@@ -99,11 +102,11 @@ public class WatchDataUtil {
         System.out.println(hex.substring(58, 62));
         System.out.println(reverse(hex.substring(58, 62)));
         // 运动类型 62-63
-        Integer sportsType = Integer.parseInt(reverse(hex.substring(60, 62)), 16);
+        Integer sportsType = Integer.parseInt(reverse(hex.substring(62, 64)), 16);
         watchData.setSportsType(sportsType);
         System.out.println("运动类型: "+sportsType);
-        System.out.println(hex.substring(60, 62));
-        System.out.println(reverse(hex.substring(60, 62)));
+        System.out.println(hex.substring(62, 64));
+        System.out.println(reverse(hex.substring(62, 64)));
         // 实时速度 64-67
         Integer realTimeSpeed = Integer.parseInt(reverse(hex.substring(64, 68)), 16);
         watchData.setRealTimeSpeed(new BigDecimal(realTimeSpeed));
@@ -152,7 +155,7 @@ public class WatchDataUtil {
     }
 
     public static void main(String[] args) {
-//        test1();
+        test1();
 //        test2();
 //        test3();
         System.out.println(reverse("580C0000"));
