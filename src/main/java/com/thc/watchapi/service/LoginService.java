@@ -56,9 +56,14 @@ public class LoginService {
         LoginDto loginDto = new LoginDto();
         loginDto.setToken(token);
         loginDto.setUser(admin);
+        System.out.println(loginDto);
         return loginDto;
     }
 
+    public Admin userInfo(String token) {
+        Admin admin = (Admin)redisUtil.get(token, RedisConstants.datebase2);
+        return admin;
+    }
 
 }
 
