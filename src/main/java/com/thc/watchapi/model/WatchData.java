@@ -38,10 +38,10 @@ public class WatchData extends BaseModel {
     private BigInteger sportsTime;
 
     @ApiModelProperty(value = "实时心率", example = "0")
-    private BigInteger realTimeHeartRate;
+    private Integer realTimeHeartRate;
 
     @ApiModelProperty(value = "平均心率", example = "83")
-    private BigInteger averageHeartRate;
+    private Integer averageHeartRate;
 
     @ApiModelProperty(value = "距离（单位：厘米）", example = "3116")
     private BigInteger distance;

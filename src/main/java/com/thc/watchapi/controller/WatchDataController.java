@@ -1,5 +1,6 @@
 package com.thc.watchapi.controller;
 
+import com.thc.watchapi.dto.WatchDataDto;
 import com.thc.watchapi.dto.WatchDataQuery;
 import com.thc.watchapi.model.WatchData;
 import com.thc.watchapi.response.BaseResult;
@@ -45,6 +46,16 @@ public class WatchDataController {
         // return R.ok().data(watchDataList);
         return BaseResult.success(watchDataList);
     }
+
+
+    @ApiOperation(value = "查询一段时间的手表数据的分析", notes = "查询xxxx-xxxx时间段内所有的手表数据以及分析")
+    @PostMapping("queryDataPeriodAnalyse")
+    public BaseResult<WatchDataDto> queryDataPeriodAnalyse(@RequestBody WatchDataQuery watchDataQuery){
+        System.out.println("controller");
+        WatchDataDto watchDataDto = watchDataService.queryDataPeriodAnalyse(watchDataQuery.getStartTime(), watchDataQuery.getEndTime(), watchDataQuery.getMac());
+        return BaseResult.success(watchDataDto);
+    }
+
 
     @ApiOperation(value = "16进制数据转换", notes = "将xxxx-xxxx时间段内的所有手表数据从16进制转换为10进制，方便解码")
     @GetMapping("transferHex2Data")

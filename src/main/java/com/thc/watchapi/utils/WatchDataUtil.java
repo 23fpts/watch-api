@@ -54,14 +54,14 @@ public class WatchDataUtil {
         System.out.println(reverse(hex.substring(18, 26)));
         // 实时心率 26-27
 //        Integer realTimeHeartRate = Integer.parseInt(hex.substring(26, 28), 16);
-        BigInteger realTimeHeartRate = new BigInteger(reverse(hex.substring(26, 28)), 16);
+        Integer realTimeHeartRate = Integer.parseInt(reverse(hex.substring(26, 28)), 16);
         watchData.setRealTimeHeartRate(realTimeHeartRate);
         System.out.println("实时心率: "+realTimeHeartRate);
         System.out.println(hex.substring(26, 28));
         System.out.println(reverse(hex.substring(26, 28)));
         // 平均心率 28-29
 //        Integer averageHeartRate = Integer.parseInt(hex.substring(28, 30), 16);
-        BigInteger averageHeartRate = new BigInteger(reverse(hex.substring(28, 30)), 16);
+        Integer averageHeartRate = Integer.parseInt(reverse(hex.substring(28, 30)), 16);
         watchData.setAverageHeartRate(averageHeartRate);
         System.out.println("平均心率: "+averageHeartRate);
         System.out.println(hex.substring(28, 30));
@@ -153,6 +153,45 @@ public class WatchDataUtil {
         }
         return result;
     }
+
+    public static String sportsType2String(Integer id) {
+        if (id==161)
+            return "跑步";
+        else if (id==162)
+            return "健走";
+        else if (id==163)
+            return "马拉松";
+        else if (id==164)
+            return "游泳";
+        else if (id==165)
+            return "室内跑";
+        else if (id==166)
+            return "越野跑";
+        else if (id==167)
+            return "徒步越野";
+        else if (id==168)
+            return "登山";
+        else if (id==169)
+            return "骑行";
+        else if (id==170)
+            return "铁人三项游泳";
+        else if (id==171)
+            return "铁人三项第一次换项";
+        else if (id==172)
+            return "铁人三项骑行";
+        else if (id==173)
+            return "铁人三项第二次换项";
+        else if (id==174)
+            return "铁人三项跑步";
+        else if (id==175)
+            return "训练计划跑步";
+        else if (id==176)
+            return "训练计划骑行";
+        else
+            return "训练计划游泳";
+
+    }
+
 
     public static void main(String[] args) {
         test1();
