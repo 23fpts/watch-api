@@ -21,7 +21,7 @@ public interface GdGroupMapper {
     List<GradeDto> queryInfoByStuIdOrSubId1(@Param("studentId") Integer studentId ,
                                            @Param("subjectId") Integer subjectId);
     @Select("<script> " +
-            "        select g.id as gradeId, g.student_id as studentId, g.subject_id as subjectId, g.grade as grade, s.name as studentName, sub.name as subjectName, sub.weight as weight\n" +
+            "        select g.id as gradeId, g.student_id as studentId, g.subject_id as subjectId, g.grade as grade, s.name as studentName, s.major as major, sub.name as subjectName, sub.weight as weight\n" +
             "        from gd_grade g\n" +
             "        left join gd_student s on s.id = g.student_id\n" +
             "        left join gd_subject sub on sub.id = g.subject_id\n" +

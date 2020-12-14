@@ -58,6 +58,7 @@ public class GradeService {
         List<GdSubject> gdSubjectList = gdSubjectMapper.selectList(null);
         Double totalWeight = 0.0;
         for (GdSubject subject: gdSubjectList) {
+            System.out.println("subjectName:"+subject.getName());
             // 顺便在算一下所有学分的和，后面要用
             totalWeight += subject.getWeight();
             Integer subjectId = subject.getId();
@@ -81,26 +82,30 @@ public class GradeService {
                     gradeDto.setSingleStandardScore(GradeUtils.calculateStandardScore(gradeDto.getGrade(), avgScore, standardDeviation));
                 }
             }
-            gradeDtoList.forEach(System.out::println);
-            // 找出所有grade中最大的和最小的标准分
-            Double maxStandardScore = 0.0;
-            Double minStandardScore = 1.0;
-            for (GradeDto gradeDto: gradeDtoList) {
-                if (gradeDto.getSingleStandardScore()>maxStandardScore){
-                    maxStandardScore = gradeDto.getSingleStandardScore();
-                }
-                if (gradeDto.getSingleStandardScore()<minStandardScore) {
-                    minStandardScore = gradeDto.getSingleStandardScore();
-                }
-            }
-            System.out.println("max:"+maxStandardScore);
-            System.out.println("min:"+minStandardScore);
-            // 5. 查询List<GradeDto>，根据Max和min计算百分制标准分，存入自己那一项中
-            for (GradeDto gradeDto: gradeDtoList) {
-                gradeDto.setHundredStandardScore(GradeUtils.hundredStandardScore(minStandardScore, maxStandardScore, gradeDto.getSingleStandardScore()));
-            }
+            System.out.println("平均分，标准差和单科标准分计算完毕，科目为："+subject.getName());
             gradeDtoList.forEach(System.out::println);
         }
+        // 找出所有grade中最大的和最小的标准分
+        Double maxStandardScore = 0.0;
+        Double minStandardScore = 1.0;
+        for (GradeDto gradeDto: gradeDtoList) {
+            if (gradeDto.getSingleStandardScore()>maxStandardScore){
+                maxStandardScore = gradeDto.getSingleStandardScore();
+            }
+            if (gradeDto.getSingleStandardScore()<minStandardScore) {
+                minStandardScore = gradeDto.getSingleStandardScore();
+            }
+        }
+        System.out.println("max:"+maxStandardScore);
+        System.out.println("min:"+minStandardScore);
+
+        for (GradeDto gradeDto: gradeDtoList)  {
+            // 5. 查询List<GradeDto>，根据Max和min计算百分制标准分，存入自己那一项中
+            gradeDto.setHundredStandardScore(GradeUtils.hundredStandardScore(minStandardScore, maxStandardScore, gradeDto.getSingleStandardScore()));
+
+        }
+        System.out.println("gradeDtoList");
+        gradeDtoList.forEach(System.out::println);
         List<GradeStudentDto> gradeStudentDtoList = new ArrayList<>();
         // 6. 根据学生id查询List<GradeDto>，算出总评标准分S, 并把数据存入List<GradeStudentDto>
         List<GdStudent> studentList = gdStudentMapper.selectList(null);
@@ -113,6 +118,10 @@ public class GradeService {
             for (GradeDto gradeDto: gradeDtoList){
                 // 如果学生id是id则加入列表
                 if (gradeDto.getStudentId().equals(student.getId())) {
+                    if (gradeStudentDto.getMajor()==null) {
+                        System.out.println("setMajor:"+gradeDto.getMajor() );
+                        gradeStudentDto.setMajor(gradeDto.getMajor());
+                    }
                     gradeDtoListForStu.add(gradeDto);
                     S = S + gradeDto.getWeight() * gradeDto.getHundredStandardScore();
                 }

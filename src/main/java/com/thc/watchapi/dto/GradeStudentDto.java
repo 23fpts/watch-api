@@ -22,6 +22,9 @@ public class GradeStudentDto {
     @ApiModelProperty(value = "姓名")
     private String name;
 
+    @ApiModelProperty(value = "专业")
+    private String major;
+
     @ApiModelProperty(value = "分数")
     private List<GradeDto> score;
 
