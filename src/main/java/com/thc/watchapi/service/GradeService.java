@@ -56,11 +56,8 @@ public class GradeService {
         List<GradeDto> gradeDtoList = gdGroupMapper.queryInfoByStuIdOrSubId(null, null);
         // 1. 查询课程表，然后在grade表中分别查询不同课程id的平均分，赋值到List<GradeDto>中课程id对应的项中
         List<GdSubject> gdSubjectList = gdSubjectMapper.selectList(null);
-        Double totalWeight = 0.0;
         for (GdSubject subject: gdSubjectList) {
             System.out.println("subjectName:"+subject.getName());
-            // 顺便在算一下所有学分的和，后面要用
-            totalWeight += subject.getWeight();
             Integer subjectId = subject.getId();
             // 根据subjectId查询grade表，算出平均分
             QueryWrapper<GdGrade> wrapper = new QueryWrapper<>();
@@ -114,6 +111,8 @@ public class GradeService {
             List<GradeDto> gradeDtoListForStu = new ArrayList<>();
             gradeStudentDto.setName(student.getName());
             // 计算总评标准分, 用S表示
+            // 学分和
+            Double totalWeight = 0.0;
             Double S = 0.0;
             for (GradeDto gradeDto: gradeDtoList){
                 // 如果学生id是id则加入列表
@@ -123,9 +122,11 @@ public class GradeService {
                         gradeStudentDto.setMajor(gradeDto.getMajor());
                     }
                     gradeDtoListForStu.add(gradeDto);
+                    totalWeight += gradeDto.getWeight();
                     S = S + gradeDto.getWeight() * gradeDto.getHundredStandardScore();
                 }
             }
+            System.out.println("totalWeight:"+totalWeight);
             // S 还要除以weight的和
             S = S/totalWeight;
             gradeStudentDto.setScore(gradeDtoListForStu);
