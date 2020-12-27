@@ -1,19 +1,24 @@
 package com.thc.watchapi.service;
 
+import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.thc.watchapi.config.listener.GradeExcelListener;
 import com.thc.watchapi.dto.GradeDto;
 import com.thc.watchapi.dto.GradeStudentDto;
 import com.thc.watchapi.mapper.grade.GdGradeMapper;
 import com.thc.watchapi.mapper.GdGroupMapper;
 import com.thc.watchapi.mapper.grade.GdStudentMapper;
 import com.thc.watchapi.mapper.grade.GdSubjectMapper;
+import com.thc.watchapi.model.excel.GradeExcelData;
 import com.thc.watchapi.model.grade.GdGrade;
 import com.thc.watchapi.model.grade.GdStudent;
 import com.thc.watchapi.model.grade.GdSubject;
 import com.thc.watchapi.utils.GradeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -99,7 +104,9 @@ public class GradeService {
         for (GradeDto gradeDto: gradeDtoList)  {
             // 5. 查询List<GradeDto>，根据Max和min计算百分制标准分，存入自己那一项中
             gradeDto.setHundredStandardScore(GradeUtils.hundredStandardScore(minStandardScore, maxStandardScore, gradeDto.getSingleStandardScore()));
-
+            System.out.println("name:"+gradeDto.getStudentName());
+            System.out.println("subject:"+gradeDto.getSubjectName());
+            System.out.println("百分之:"+gradeDto.getHundredStandardScore());
         }
         System.out.println("gradeDtoList");
         gradeDtoList.forEach(System.out::println);
@@ -136,5 +143,23 @@ public class GradeService {
         System.out.println("result");
         gradeStudentDtoList.forEach(System.out::println);
         return gradeStudentDtoList;
+    }
+
+    /**
+     * 从excel倒入数据到数据库
+     */
+    public void importExcelData(MultipartFile multipartFile){
+        try {
+            gdStudentMapper.deleteAll();
+            gdSubjectMapper.deleteAll();
+            gdGradeMapper.deleteAll();
+            // 文件输入流
+            InputStream in = multipartFile.getInputStream();
+            // 调用方法读取
+            EasyExcel.read(in, GradeExcelData.class, new GradeExcelListener(gdStudentMapper, gdSubjectMapper, gdGradeMapper)).sheet().doRead();
+
+        }catch (Exception e){
+
+        }
     }
 }

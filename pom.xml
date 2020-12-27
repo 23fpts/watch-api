@@ -141,6 +141,13 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- easyexcel 基于poi，在service-pom中已经导入了 且poi需要3.17版本 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

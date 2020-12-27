@@ -6,10 +6,8 @@ import com.thc.watchapi.response.BaseResult;
 import com.thc.watchapi.service.GradeService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -31,5 +29,11 @@ public class GradeController {
     @GetMapping(value = "gradeinfo")
     public BaseResult<List<GradeStudentDto>> userInfo() {
         return BaseResult.success(gradeService.queryStudentGrade());
+    }
+
+    @PostMapping("importExcel")
+    public BaseResult<Object> importExcel(MultipartFile multipartFile) {
+        gradeService.importExcelData(multipartFile);
+        return BaseResult.success();
     }
 }

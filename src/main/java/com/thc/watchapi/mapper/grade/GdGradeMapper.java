@@ -2,6 +2,7 @@ package com.thc.watchapi.mapper.grade;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.thc.watchapi.model.grade.GdGrade;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,4 +14,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface GdGradeMapper extends BaseMapper<GdGrade> {
+
+    // 清空数据库
+    @Update("delete from gd_grade")
+    void deleteAll();
 }

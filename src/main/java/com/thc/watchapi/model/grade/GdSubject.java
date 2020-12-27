@@ -32,4 +32,5 @@ public class GdSubject implements Serializable {
 
     @ApiModelProperty(value = "课程权重")
     private Double weight;
+
 }

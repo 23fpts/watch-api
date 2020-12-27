@@ -34,4 +34,10 @@ public class GdStudent implements Serializable {
     @ApiModelProperty(value = "专业")
     private String major;
 
+    // 学号
+    @ApiModelProperty(value = "学号")
+    private String stuNumber;
+
+
+
 }
