@@ -37,4 +37,7 @@ public interface GdGroupMapper {
     List<GradeDto> queryInfoByStuIdOrSubId(@Param("studentId") Integer studentId ,
                         @Param("subjectId") Integer subjectId);
 
+
+    // bct 和 biz多表查询
+
 }
