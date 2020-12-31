@@ -1,7 +1,11 @@
 package com.thc.watchapi.controller;
 
+import com.thc.watchapi.dto.Grade2StudentDto;
+import com.thc.watchapi.dto.GradeAcaQuery;
 import com.thc.watchapi.dto.GradeStudentDto;
 import com.thc.watchapi.model.Admin;
+import com.thc.watchapi.model.grade2.BctStudentInfo;
+import com.thc.watchapi.model.grade2.BizWListAcademic;
 import com.thc.watchapi.response.BaseResult;
 import com.thc.watchapi.service.GradeService;
 import io.swagger.annotations.Api;
@@ -36,4 +40,25 @@ public class GradeController {
         gradeService.importExcelData(multipartFile);
         return BaseResult.success();
     }
+
+    @PostMapping("queryBctStudent")
+    public BaseResult<List<BctStudentInfo>> queryBctStudent(@RequestParam(value = "grade", required = false, defaultValue = "") String grade,
+                                                            @RequestParam(value = "college", required = false, defaultValue = "") String college) {
+
+        return BaseResult.success(gradeService.queryBctStu(grade, college));
+    }
+
+    @PostMapping("queryBizAca")
+    public BaseResult<List<BizWListAcademic>> queryBizAca(@RequestBody GradeAcaQuery grade) {
+
+        return BaseResult.success(gradeService.queryAca(grade.getStartTime(), grade.getEndTime()));
+    }
+
+
+    @GetMapping(value = "grade2info")
+    public BaseResult<List<Grade2StudentDto>> userInfo(@RequestParam(value = "stuNo", required = false, defaultValue = "") String stuNo) {
+        return BaseResult.success(gradeService.queryStuDto(stuNo));
+    }
+
+
 }
