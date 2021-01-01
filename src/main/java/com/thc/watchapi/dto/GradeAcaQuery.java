@@ -16,4 +16,10 @@ public class GradeAcaQuery {
 
     private String endTime;
 
+    private String grade;
+
+    private String college;
+
+    private String stuNo;
+
 }

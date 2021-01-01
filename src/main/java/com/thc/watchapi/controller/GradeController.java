@@ -55,9 +55,9 @@ public class GradeController {
     }
 
 
-    @GetMapping(value = "grade2info")
-    public BaseResult<List<Grade2StudentDto>> userInfo(@RequestParam(value = "stuNo", required = false, defaultValue = "") String stuNo) {
-        return BaseResult.success(gradeService.queryStuDto(stuNo));
+    @PostMapping(value = "grade2info")
+    public BaseResult<List<Grade2StudentDto>> userInfo(@RequestBody GradeAcaQuery grade) {
+        return BaseResult.success(gradeService.queryStuDto(grade.getGrade(), grade.getCollege(), grade.getStartTime(), grade.getEndTime(), grade.getStuNo()));
     }
 
 
