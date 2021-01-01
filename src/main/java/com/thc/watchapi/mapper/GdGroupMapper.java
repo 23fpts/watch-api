@@ -1,6 +1,8 @@
 package com.thc.watchapi.mapper;
 
 import com.thc.watchapi.dto.GradeDto;
+import com.thc.watchapi.mapper.grade.GdBizWListAcaMapper;
+import com.thc.watchapi.model.grade2.BizWListAcademic;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -38,6 +40,26 @@ public interface GdGroupMapper {
                         @Param("subjectId") Integer subjectId);
 
 
+    @Select("<script>   select g.ID_ as acaId, g.CREATE_USER_ as acaCreateUser, g.CREATE_TIME_ as createTime, g.STU_NO_ as stuNoInAca, g.PROJECT_ as project, g.SCORE_ as score, g.EXAM_TIME_ as examTime, g.XF_ as xf \n" +
+            " from biz_w_list_academic g\n" +
+            " left join bct_student_info s on s.STU_NO_ = g.STU_NO_" +
+            "        <trim prefix=\"WHERE\" prefixOverrides=\"AND|OR\" suffixOverrides=\"AND|OR\">\n" +
+            "            <if test=\"grade !=null and grade !='' \">\n" +
+            "                AND g.GRADE_ = #{grade}\n" +
+            "            </if>\n" +
+            "            <if test=\"college !=null and college != '' \" >\n" +
+            "                AND s.COLLEGE_ = #{college}\n" +
+            "            </if>\n" +
+            "            <if test=\"startTime !=null and startTime != '' and endTime !=null and endTime != '' \" >\n" +
+            "                AND g.EXAM_TIME_ between #{startTime} and #{endTime} \n" +
+            "            </if>\n" +
+            "        </trim>\n" +
+            "</script>")
     // bct 和 biz多表查询
+    List<BizWListAcademic> queryAcaByTimeGradeAndCollege(@Param("grade") String grade,
+                                                         @Param("college") String college,
+                                                         @Param("startTime") String startTime,
+                                                         @Param("endTime") String endTime);
+
 
 }

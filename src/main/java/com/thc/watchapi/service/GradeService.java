@@ -203,12 +203,19 @@ public class GradeService {
     }
 
     // STU_NO_
-    public List<Grade2StudentDto> queryStuDto(String stuNo) {
-        // 0. 先多表查询所有成绩信息进入List<GradeDto>中
-        // TODO delete
-        List<GradeDto> gradeDtoList = gdGroupMapper.queryInfoByStuIdOrSubId(null, null);
-
-        List<BizWListAcademic> academicList = wListAcaMapper.selectList(null);
+    public List<Grade2StudentDto> queryStuDto(String grade, String college, String startTime, String endTime, String stuNo) {
+        System.out.println("grade:");
+        System.out.println(grade);
+        System.out.println("college:");
+        System.out.println(college);
+        System.out.println("startTime");
+        System.out.println(startTime);
+        System.out.println("endTime");
+        System.out.println(endTime);
+        System.out.println("stuNo");
+        System.out.println(stuNo);
+        // TODO 应该两表集联查询
+        List<BizWListAcademic> academicList = gdGroupMapper.queryAcaByTimeGradeAndCollege(grade, college, startTime, endTime);
         // 赋值到grade2dto中法方便计算
         List<Grade2Dto> grade2DtoList = new ArrayList<>();
         for (BizWListAcademic academic: academicList){
@@ -261,12 +268,10 @@ public class GradeService {
             // 5. 查询List<GradeDto>，根据Max和min计算百分制标准分，存入自己那一项中
             grade2Dto.setHundredStandardScore(GradeUtils.hundredStandardScore(minStandardScore, maxStandardScore, grade2Dto.getSingleStandardScore()));
         }
-        System.out.println("grade2Dto:");
-        for (Grade2Dto grade2Dto: grade2DtoList) {
-            System.out.println(grade2Dto.getXf());
-        }
+
         List<Grade2StudentDto> grade2StudentDtoList = new ArrayList<>();
         if (!StringUtils.isEmpty(stuNo)) {
+            System.out.println("查询一个");
             // 只查询一个学生
             // 6. 根据学生id查询List<GradeDto>，算出总评标准分S, 并把数据存入List<GradeStudentDto>
             List<BctStudentInfo> bctStudentInfoList = bctStudentMapper.selectList(null);
