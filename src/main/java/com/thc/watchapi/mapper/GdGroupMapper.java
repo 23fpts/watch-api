@@ -45,7 +45,7 @@ public interface GdGroupMapper {
             " left join bct_student_info s on s.STU_NO_ = g.STU_NO_" +
             "        <trim prefix=\"WHERE\" prefixOverrides=\"AND|OR\" suffixOverrides=\"AND|OR\">\n" +
             "            <if test=\"grade !=null and grade !='' \">\n" +
-            "                AND g.GRADE_ = #{grade}\n" +
+            "                AND s.GRADE_ = #{grade}\n" +
             "            </if>\n" +
             "            <if test=\"college !=null and college != '' \" >\n" +
             "                AND s.COLLEGE_ = #{college}\n" +
