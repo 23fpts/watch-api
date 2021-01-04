@@ -214,6 +214,7 @@ public class GradeService {
         System.out.println(endTime);
         System.out.println("stuNo");
         System.out.println(stuNo);
+        // TODO 成绩表没有考生信息
         // TODO 应该两表集联查询
         List<BizWListAcademic> academicList = gdGroupMapper.queryAcaByTimeGradeAndCollege(grade, college, startTime, endTime);
         // 赋值到grade2dto中法方便计算
@@ -265,6 +266,7 @@ public class GradeService {
             }
         }
 
+
         for (Grade2Dto grade2Dto: grade2DtoList)  {
             // 5. 查询List<GradeDto>，根据Max和min计算百分制标准分，存入自己那一项中
             grade2Dto.setHundredStandardScore(GradeUtils.hundredStandardScore(minStandardScore, maxStandardScore, grade2Dto.getSingleStandardScore()));
@@ -303,7 +305,7 @@ public class GradeService {
                     Double S = 0.0;
                     for (Grade2Dto grade2Dto: grade2DtoList) {
                         // 如果stuNO是的就加入列表
-                        if (grade2Dto.getStuNoInAca().equals(studentInfo.getStuNoInStu())) {
+                        if (grade2Dto.getStuNoInAca().equals(studentInfo.getStuNoInStu())&&grade2Dto.getXf()!=null) {
                             grade2DtoListForStu.add(grade2Dto);
                             totalWeight += grade2Dto.getXf();
                             S = S+grade2Dto.getXf() * grade2Dto.getHundredStandardScore();
