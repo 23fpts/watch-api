@@ -315,6 +315,9 @@ public class GradeService {
                     S = S/totalWeight;
                     grade2StudentDto.setScores(grade2DtoListForStu);
                     grade2StudentDto.setTotalStandardScore(S);
+                    if (grade2StudentDto.getScores().size()==0) {
+                        grade2StudentDto.setTotalStandardScore(null);
+                    }
                     grade2StudentDtoList.add(grade2StudentDto);
                 }
             }
@@ -344,9 +347,13 @@ public class GradeService {
             S = S/totalWeight;
             grade2StudentDto.setScores(grade2DtoListForStu);
             grade2StudentDto.setTotalStandardScore(S);
+            if (grade2StudentDto.getScores().size()==0) {
+                grade2StudentDto.setTotalStandardScore(null);
+            }
             grade2StudentDtoList.add(grade2StudentDto);
 
         }
+
         return  grade2StudentDtoList;
     }
 }
