@@ -30,11 +30,11 @@ public class Grade2StudentDto extends BctStudentInfo {
 
     // 标准分最大值M
     @ApiModelProperty(value = "M")
-    private Double max;
+    private String max;
 
     // 标准分最小值m
     @ApiModelProperty(value = "m")
-    private Double min;
+    private String min;
 
     @ApiModelProperty(value = "总评标准分")
     private Double totalStandardScore;

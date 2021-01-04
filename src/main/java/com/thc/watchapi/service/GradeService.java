@@ -25,6 +25,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -297,8 +298,8 @@ public class GradeService {
                     // 学生基本信息
                     BeanUtils.copyProperties(studentInfo, grade2StudentDto);
                     // M and m
-                    grade2StudentDto.setMax(maxStandardScore);
-                    grade2StudentDto.setMin(minStandardScore);
+                    grade2StudentDto.setMax(""+maxStandardScore);
+                    grade2StudentDto.setMin(""+String.format("%.16f", minStandardScore));
                     grade2StudentDto.setStudentNumber(bctStudentInfoList.size());
                     grade2StudentDto.setSubjectNumber(subjectList.size());
                     Double totalWeight = 0.0;
