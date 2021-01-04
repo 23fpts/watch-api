@@ -286,7 +286,7 @@ public class GradeService {
             System.out.println("查询一个");
             // 只查询一个学生
             // 6. 根据学生id查询List<GradeDto>，算出总评标准分S, 并把数据存入List<GradeStudentDto>
-            List<BctStudentInfo> bctStudentInfoList = bctStudentMapper.selectList(null);
+            // List<BctStudentInfo> bctStudentInfoList = bctStudentMapper.selectList(null);
             for (BctStudentInfo studentInfo: bctStudentInfoList) {
                 if (studentInfo.getStuNoInStu().equals(stuNo)) {
                     Grade2StudentDto grade2StudentDto = new Grade2StudentDto();
