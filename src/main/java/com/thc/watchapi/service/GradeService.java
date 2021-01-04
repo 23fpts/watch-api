@@ -264,10 +264,22 @@ public class GradeService {
                 minStandardScore = grade2Dto.getSingleStandardScore();
             }
         }
+
         for (Grade2Dto grade2Dto: grade2DtoList)  {
             // 5. 查询List<GradeDto>，根据Max和min计算百分制标准分，存入自己那一项中
             grade2Dto.setHundredStandardScore(GradeUtils.hundredStandardScore(minStandardScore, maxStandardScore, grade2Dto.getSingleStandardScore()));
         }
+
+        // 根据查询条件查询学生表
+        QueryWrapper<BctStudentInfo> wrapper = new QueryWrapper<>();
+        if (!StringUtils.isEmpty(college)) {
+            wrapper.eq("COLLEGE_", college);
+        }
+        if (!StringUtils.isEmpty(grade)) {
+            wrapper.eq("GRADE_", grade);
+        }
+
+        List<BctStudentInfo> bctStudentInfoList = bctStudentMapper.selectList(wrapper);
 
         List<Grade2StudentDto> grade2StudentDtoList = new ArrayList<>();
         if (!StringUtils.isEmpty(stuNo)) {
@@ -282,6 +294,11 @@ public class GradeService {
                     List<Grade2Dto> grade2DtoListForStu = new ArrayList<>();
                     // 学生基本信息
                     BeanUtils.copyProperties(studentInfo, grade2StudentDto);
+                    // M and m
+                    grade2StudentDto.setMax(maxStandardScore);
+                    grade2StudentDto.setMin(minStandardScore);
+                    grade2StudentDto.setStudentNumber(bctStudentInfoList.size());
+                    grade2StudentDto.setSubjectNumber(subjectList.size());
                     Double totalWeight = 0.0;
                     Double S = 0.0;
                     for (Grade2Dto grade2Dto: grade2DtoList) {
@@ -302,7 +319,8 @@ public class GradeService {
             return  grade2StudentDtoList;
         }
         // 6. 根据学生id查询List<GradeDto>，算出总评标准分S, 并把数据存入List<GradeStudentDto>
-        List<BctStudentInfo> bctStudentInfoList = bctStudentMapper.selectList(null);
+
+
         for (BctStudentInfo studentInfo: bctStudentInfoList) {
             Grade2StudentDto grade2StudentDto = new Grade2StudentDto();
             // 记录学生的学分
