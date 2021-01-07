@@ -28,4 +28,14 @@ public class WeiyivalueController {
         return BaseResult.success(weiyivalueService.queryDataPeriod(time));
     }
 
+
+    @ApiOperation(value = "按时间段查询位移量")
+    @GetMapping("query1")
+    public BaseResult<Object> queryDuringTime(@RequestParam(value = "startTime") String startTime,
+                                              @RequestParam(value = "endTime") String endTime) {
+        return BaseResult.success(weiyivalueService.queryDataPeriod2(startTime,endTime));
+
+
+    }
+
 }

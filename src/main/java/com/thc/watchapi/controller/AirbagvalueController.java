@@ -28,4 +28,14 @@ public class AirbagvalueController {
         return BaseResult.success(airbagvalueService.queryDataPeriod(time));
     }
 
+    @ApiOperation(value = "按时间段查询压力值")
+    @GetMapping("query1")
+    public BaseResult<Object> queryDuringTime(@RequestParam(value = "startTime") String startTime,
+                                              @RequestParam(value = "endTime") String endTime) {
+        return BaseResult.success(airbagvalueService.queryDataPeriod2(startTime,endTime));
+
+
+    }
+
+
 }
